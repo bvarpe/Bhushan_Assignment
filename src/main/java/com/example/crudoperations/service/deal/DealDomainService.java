@@ -87,7 +87,8 @@ public class DealDomainService implements DealService{
         }
         try {
             Deal deal1 = dealJpaService.convertDealDtoTODeal(dealDto);
-        dealJpaService.copyAllProperties(deal1 ,existingDeal);
+            dealJpaService.copyAllProperties(deal1 ,existingDeal);
+            existingDeal.setDealNumber(dealNumber);
             dealRepostory.saveAndFlush(existingDeal);
         } catch (Exception e) {
             throw new DealNotUpdated("Deal Not updated with ID : ", dealNumber);
