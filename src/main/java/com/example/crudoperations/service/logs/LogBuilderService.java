@@ -3,6 +3,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -12,6 +13,7 @@ public class LogBuilderService {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+    @Autowired
     private  ObjectMapper objectMapper;
 
     public String log(String message, Throwable throwable) {

@@ -7,4 +7,5 @@ public interface DealService {
     DealDto getDealById(String dealNumber);
     boolean deleteDealById(String dealNumber);
     DealDto updateDealById(String dealNumber ,DealDto dealDto);
+    DealDto updateDealByIdUsingPut(String dealNumber ,DealDto dealDto);
 }

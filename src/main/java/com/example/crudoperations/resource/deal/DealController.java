@@ -16,12 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import java.util.Map;
 
 @RestController
 public class DealController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(DealController.class);
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private  DealService dealService;
@@ -29,23 +28,19 @@ public class DealController {
     private ResponceMessageHandler responceHandler;
 
     @PostMapping("/deal/create")
-    public ResponseEntity<Map<String,Object>> creatDeal(@RequestBody DealDto dealDto) {
-        try {
-            dealService.createDeal(dealDto);
+    public ResponseEntity<DealDto> creatDeal(@RequestBody DealDto dealDto) {
+            DealDto dealDto1=dealService.createDeal(dealDto);
             log.info("Deal Created with Id :"+dealDto.getDealNumber());
-            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(responceHandler.dealCreated());
-        }catch (Exception exception){
-            log.info("Deal not Created ");
-           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).contentType(MediaType.APPLICATION_JSON).body(responceHandler.dealNotCteated());
-        }
+            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(dealDto1);
+
     }
-    @GetMapping("/deal/getById/{dealNumber}")
+    @GetMapping("/deal/byId/{dealNumber}")
     public ResponseEntity<DealDto> getDealById(@PathVariable String dealNumber){
         DealDto dealDto=dealService.getDealById(dealNumber);
             return ResponseEntity.status(HttpStatus.OK).body(dealDto);
     }
 
-    @DeleteMapping("/deal/deleteById/{dealNumber}")
+    @DeleteMapping("/deal/byId/{dealNumber}")
     public ResponseEntity<Map<String,Object>> deleteDealById(@PathVariable String dealNumber){
         if (dealService.deleteDealById(dealNumber)) {
             return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(responceHandler.dealDeleted());
@@ -53,9 +48,16 @@ public class DealController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).contentType(MediaType.APPLICATION_JSON).body(responceHandler.dealNotDeleted());
         }
     }
-  @PatchMapping("/deal/updateById/{dealNumber}")
+  @PatchMapping ("/deal/byId/{dealNumber}")
     public ResponseEntity<DealDto> updateDealById(@PathVariable String dealNumber,@RequestBody DealDto dealDto) {
                DealDto deal=dealService.updateDealById(dealNumber, dealDto);
                return ResponseEntity.status(HttpStatus.OK).body(deal);
   }
+    @PutMapping ("/deal/updateById/{dealNumber}")
+    public ResponseEntity<DealDto> updateDealByIdUsigPut(@PathVariable String dealNumber,@RequestBody DealDto dealDto) {
+        DealDto deal=dealService.updateDealByIdUsingPut(dealNumber, dealDto);
+        return ResponseEntity.status(HttpStatus.OK).body(deal);
+    }
+
+
 }

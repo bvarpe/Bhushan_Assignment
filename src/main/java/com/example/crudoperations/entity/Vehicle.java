@@ -4,7 +4,6 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Vehicle {
-
     private String stockNumber;
     private String vin;
     private String make;

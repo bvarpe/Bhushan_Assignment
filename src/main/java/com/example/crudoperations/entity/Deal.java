@@ -71,9 +71,7 @@ public class Deal {
             @AttributeOverride(name = "country", column = @Column(name = "country"))
     })
     private Customer customer;
-
-
-    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER , cascade= {CascadeType.MERGE})
     @JoinColumn(name ="sales_rep_id")
     private SalesRep salesRep;
 

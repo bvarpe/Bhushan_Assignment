@@ -4,12 +4,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
 public class ExceptionHendler {
+
+    @ExceptionHandler(DealNotCreatedException.class)
+    public ResponseEntity<Map<String ,Object>> handleDealNotCreatedException(DealNotCreatedException dealEx){
+        Map<String ,Object> map=new HashMap<String,Object>();
+        map.put("message", dealEx.getMessage());
+        map.put("Status", HttpStatus.NOT_IMPLEMENTED);
+
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(map);
+    }
 
     @ExceptionHandler(DealException.class)
     public ResponseEntity<Map<String ,Object>> handleDealNotFoundException(DealException dealEx){
@@ -51,9 +59,9 @@ public class ExceptionHendler {
     public ResponseEntity<Map<String ,Object>> handleDealNotFoundException(DealNotUpdated dealNotUpdated){
         Map<String ,Object> map=new HashMap<String,Object>();
         map.put("message", dealNotUpdated.getMessage());
-        map.put("Status", HttpStatus.INTERNAL_SERVER_ERROR);
+        map.put("Status", HttpStatus. NOT_IMPLEMENTED);
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(map);
     }
 
 

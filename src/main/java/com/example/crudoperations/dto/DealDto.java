@@ -19,15 +19,13 @@ public class DealDto  {
     private VehicleDto vehicleDto;
 
     private CustomerDto customerDto;
-
     private SalesRepDto salesRepDto;
-
 
     public SalesRepDto getSalesRepDto() {
         return salesRepDto;
     }
 
-    public void setSalesRepDto() {
+    public void setSalesRepDto(SalesRepDto salesRepDto) {
         this.salesRepDto = salesRepDto;
     }
 

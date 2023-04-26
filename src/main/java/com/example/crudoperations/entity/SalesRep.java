@@ -2,17 +2,13 @@ package com.example.crudoperations.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 @Entity
-@Table(name = "sales_rep",
-        indexes = {
-                @Index(name = "idx_sales_rep_global_id", columnList = "globalId", unique = true)})
+@Table(name ="sales_rep")
 public class SalesRep {
 
     @Id
     private String id;
-    private String globalId;
     private String firstName;
     private String lastName;
     private String arcId;
@@ -24,15 +20,6 @@ public class SalesRep {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-
-    public String getGlobalId() {
-        return globalId;
-    }
-
-    public void setGlobalId(String globalId) {
-        this.globalId = globalId;
     }
 
     public String getFirstName() {
