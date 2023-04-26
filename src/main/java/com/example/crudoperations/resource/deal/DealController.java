@@ -28,7 +28,10 @@ public class DealController {
     private ResponceMessageHandler responceHandler;
 
     @PostMapping("/deal/create")
-    public ResponseEntity<DealDto> creatDeal(@RequestBody DealDto dealDto) {
+    public ResponseEntity creatDeal(@RequestBody DealDto dealDto) {
+        if(dealDto.getSourceTag()==null ||dealDto.getDealershipId()==null || dealDto.getSource()==null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).contentType(MediaType.APPLICATION_JSON).body(responceHandler.responceForNullValues());
+        }
             DealDto dealDto1=dealService.createDeal(dealDto);
             log.info("Deal Created with Id :"+dealDto.getDealNumber());
             return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(dealDto1);

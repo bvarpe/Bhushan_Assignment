@@ -7,6 +7,12 @@ import java.util.Map;
 
 @Component
 public class ResponceMessageHandler {
+    public Map<String ,Object> responceForNullValues(){
+        Map<String ,Object> mapDealNotCreated=new HashMap<String,Object>();
+        mapDealNotCreated.put("message","You sent null values.");
+        mapDealNotCreated.put("Status", HttpStatus.BAD_REQUEST);
+        return mapDealNotCreated;
+    }
     public Map<String ,Object> dealNotCteated(){
         Map<String ,Object> mapDealNotCreated=new HashMap<String,Object>();
         mapDealNotCreated.put("message","Deal not Created");
