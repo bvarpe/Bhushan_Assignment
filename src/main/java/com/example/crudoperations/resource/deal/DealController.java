@@ -56,9 +56,9 @@ public class DealController {
                DealDto deal=dealService.updateDealById(dealNumber, dealDto);
                return ResponseEntity.status(HttpStatus.OK).body(deal);
   }
-    @PutMapping ("/deal/updateById/{dealNumber}")
-    public ResponseEntity<DealDto> updateDealByIdUsigPut(@PathVariable String dealNumber,@RequestBody DealDto dealDto) {
-        DealDto deal=dealService.updateDealByIdUsingPut(dealNumber, dealDto);
+    @PutMapping ("/deal/byId/{dealNumber}")
+    public ResponseEntity<DealDto> updateDeal(@PathVariable String dealNumber,@RequestBody DealDto dealDto) {
+        DealDto deal=dealService.updateDeal(dealNumber, dealDto);
         return ResponseEntity.status(HttpStatus.OK).body(deal);
     }
 

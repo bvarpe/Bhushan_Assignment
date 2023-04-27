@@ -16,7 +16,7 @@ import java.util.UUID;
 @Service
 public class DealDomainService implements DealService{
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-        @Autowired
+    @Autowired
     private DealJpaService dealJpaService;
     @Autowired
     private DealRepository dealRepostory;
@@ -36,8 +36,8 @@ public class DealDomainService implements DealService{
         }
         return dealDto;
     }
-@Override
-    public DealDto getDealById(String dealNumber) {
+     @Override
+     public DealDto getDealById(String dealNumber) {
         Deal deal = dealRepostory.findDealByDealNumber(dealNumber);
         if(deal == null){
             log.info("Deal not exists with id  :" + dealNumber);
@@ -79,7 +79,7 @@ public class DealDomainService implements DealService{
     }
 
     @Override
-    public DealDto updateDealByIdUsingPut(String dealNumber,DealDto dealDto) {
+    public DealDto updateDeal(String dealNumber,DealDto dealDto) {
         Deal existingDeal = dealRepostory.findDealByDealNumber(dealNumber);
         if (existingDeal == null) {
             log.info("Deal not exists with id  :" + dealNumber);
